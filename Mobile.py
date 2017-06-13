@@ -34,32 +34,35 @@ class TestHelper:
         shell指令使用雙引號括起來，例如：adb shell "am broadcast -a myIME.intent.action.pass.string -e input abc"
                         但由於內容也可能為包含符號或是空白，所以必須再使用雙引號括起來，例如："abc c"
         """
-        self.adb.shell_cmd('\"am broadcast -a myIME.intent.action.pass.string -e input \\\"\"%s\"\\\"\"' % TestHelper.__convert_to_unicode_by_text(self, text))
+        self.adb.shell_cmd('\"am broadcast -a myIME.intent.action.pass.string -e input \\\"\"%s\"\\\"\"' %
+                           TestHelper.__convert_to_unicode_by_text(self, text))
         self.adb.shell_cmd('input keyevent KEYCODE_UNKNOWN')
 
+
 class ATX:
-	def __init__(self):
-		import atx
-		self.d = atx.connect()
+    def __init__(self):
+        import atx
+        self.d = atx.connect()
 
-	def click_By_String(self,words):
-		self.d(text=words).click()
+    def click_By_String(self, words):
+        self.d(text=words).click()
 
-	def clickImage(self,img):
-		self.d.click_image(img)
+    def clickImage(self, img):
+        self.d.click_image(img)
 
-        def assertImage(self, img):
-            if self.d.exists(img):
-                return True
-       	    else:
-                return False
+    def assertImage(self, img):
+        if self.d.exists(img):
+            return True
+        else:
+            return False
+
 
 class ADB:
     def __init__(self, android_serial=None):
         self.buf = []
         self.buf.append('adb ')
         self.prefix_cmd = ''.join(self.buf)
-        if android_serial is not None :
+        if android_serial is not None:
             self.buf.append('-s %s ' % android_serial)
             self.prefix_cmd = ''.join(self.buf)
 
@@ -83,6 +86,7 @@ class ADB:
         self.buf.append(cmd)
         cmd = ''.join(self.buf)
         return subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+
 
 class Mobile():
 
@@ -152,10 +156,11 @@ class Mobile():
         """
         return self.device.info
 
-#Key Event Actions of the device
+# Key Event Actions of the device
     """
     Turn on/off screen
     """
+
     def turn_on_screen(self):
         """
         Turn on screen
@@ -278,7 +283,7 @@ class Mobile():
         """
         self.device.press.power()
 
-#Gesture interaction of the device
+# Gesture interaction of the device
 
     def click_at_coordinates(self, x, y):
         """
@@ -374,7 +379,7 @@ class Mobile():
         """
         obj.swipe.down(steps=steps)
 
-    def drag_by_coordinates(self,sx, sy, ex, ey, steps=10):
+    def drag_by_coordinates(self, sx, sy, ex, ey, steps=10):
         """
         Drag from (sx, sy) to (ex, ey) with steps
 
@@ -382,7 +387,7 @@ class Mobile():
         """
         self.device.drag(sx, sy, ex, ey, steps)
 
-    #Wait until the specific ui object appears or gone
+    # Wait until the specific ui object appears or gone
 
     # wait until the ui object appears
     def wait_for_exists(self, timeout=0, *args, **selectors):
@@ -418,7 +423,6 @@ class Mobile():
         in the given timeout
         """
         return obj.wait.gone(timeout=timeout)
-
 
     # Perform fling on the specific ui object(scrollable)
     def fling_forward_horizontally(self, *args, **selectors):
@@ -479,7 +483,7 @@ class Mobile():
         """
         return obj.scroll.horiz.backward(steps=steps)
 
-    def scroll_to_horizontally(self, obj, *args,**selectors):
+    def scroll_to_horizontally(self, obj, *args, **selectors):
         """
         return whether the object can be scroll or not
         """
@@ -503,7 +507,7 @@ class Mobile():
         """
         return obj.scroll.vert.to(**selectors)
 
-#Screen Actions of the device
+# Screen Actions of the device
 
     def get_screen_orientation(self):
         """
@@ -554,9 +558,10 @@ class Mobile():
         st = datetime.datetime.fromtimestamp(ts).strftime('%Y%m%d%H%M%S')
         screenshot_path = '%s%s%s.png' % (output_dir, os.sep, st)
         self.device.screenshot(screenshot_path, scale, quality)
-        logger.info('\n<a href="%s">%s</a><br><img src="%s">' % (screenshot_path, st, screenshot_path), html=True)
+        logger.info('\n<a href="%s">%s</a><br><img src="%s">' %
+                    (screenshot_path, st, screenshot_path), html=True)
 
-#Watcher
+# Watcher
 #     def register_click_watcher(self, watcher_name, selectors, *condition_list):
 #         """
 #         The watcher click on the object which has the selectors when conditions match
@@ -617,7 +622,7 @@ class Mobile():
         watcher.press(*unicode_to_list(press_keys))
         self.device.watchers.run()
 
-    def remove_watchers(self, watcher_name = None):
+    def remove_watchers(self, watcher_name=None):
         """
         Remove watcher with *watcher_name* or remove all watchers
         """
@@ -632,7 +637,7 @@ class Mobile():
         """
         return self.device.watchers
 
-#Selector
+# Selector
 
     def get_object(self, *args, **selectors):
         """
@@ -747,7 +752,7 @@ class Mobile():
             text = target.info['text']
             target.clear_text()
             remain_text = target.info['text']
-            if text == ''  or remain_text == text:
+            if text == '' or remain_text == text:
                 break
 
     def open_notification(self):
@@ -800,7 +805,7 @@ class Mobile():
         """
         return self.adb.cmd(cmd)
 
-    def execute_adb_shell_command(self,cmd):
+    def execute_adb_shell_command(self, cmd):
         """
         Execute adb shell *cmd*
         """
@@ -835,7 +840,8 @@ class Mobile():
         """
         cmd = 'adb shell am start edu.ntut.csie.sslab1321.testagent/edu.ntut.csie.sslab1321.testagent.DummyActivity'
         cmd = 'adb shell am broadcast -a testagent -e action CONNECT_TO_WIFI -e ssid WEP -e password 12345'
-        cmd = 'am broadcast -a testagent -e action CONNECT_TO_WIFI -e ssid %s -e password %s' % (ssid, password)
+        cmd = 'am broadcast -a testagent -e action CONNECT_TO_WIFI -e ssid %s -e password %s' % (
+            ssid, password)
         self.adb.shell_cmd(cmd)
 
     def clear_connected_wifi(self):
@@ -857,6 +863,7 @@ class Mobile():
 
     def test(self):
         pass
+
 
 if __name__ == '__main__':
     print 'start'

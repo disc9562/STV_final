@@ -4,21 +4,21 @@ Library           Mobile.ATX
 Library           Mobile.py    WITH NAME    sealnote
 
 *** Test Cases ***
-Try to save empty note
+Create a Empty Note
     Init mobile
     open app
-    sealnote.set_text    1234    com.twistedplane.sealnote:id/password_meter_input
-    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    sealnote.set_text    1234    resourceId=com.twistedplane.sealnote:id/password_meter_input
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/password_action_button
     sealnote.click    resourceId=com.twistedplane.sealnote:id/create_note_button
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
     text should be    Create a New Note
     [Teardown]    clean app
 
-Try to save note no tags
+Create a Note without Tags
     Init mobile
     open app
     sealnote.set_text    1234    resourceId=com.twistedplane.sealnote:id/password_meter_input
-    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/password_action_button
     sealnote.click    resourceId=com.twistedplane.sealnote:id/create_note_button
     sealnote.set_text    hello    resourceId=com.twistedplane.sealnote:id/note_activity_title
     sealnote.set_text    good    resourceId=com.twistedplane.sealnote:id/note_activity_note
@@ -28,7 +28,7 @@ Try to save note no tags
     Note text should be    good
     [Teardown]    clean app
 
-Try to save note no context
+Create a Note without Context
     Init mobile
     open app
     sealnote.set_text    1234    resourceId=com.twistedplane.sealnote:id/password_meter_input
@@ -40,7 +40,7 @@ Try to save note no context
     Note title should be    hello
     [Teardown]    clean app
 
-Try to save note no title
+Create a Note without Title
     Init mobile
     open app
     sealnote.set_text    1234    resourceId=com.twistedplane.sealnote:id/password_meter_input
@@ -52,7 +52,7 @@ Try to save note no title
     Note text should be    good
     [Teardown]    clean app
 
-Try to save note only tags
+Create a Note Only Tags
     Init mobile
     open app
     sealnote.set_text    1234    resourceId=com.twistedplane.sealnote:id/password_meter_input
@@ -64,7 +64,7 @@ Try to save note only tags
     text should be    Create a New Note
     [Teardown]    clean app
 
-Try to save note have tags and context
+Create Note Have Tags and Context
     Init mobile
     open app
     sealnote.set_text    1234    resourceId=com.twistedplane.sealnote:id/password_meter_input
@@ -75,10 +75,10 @@ Try to save note have tags and context
     builtin.sleep    2s
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
     Note text should be    good
-    tags should be    tags.png
+    Tags should be Exsist    tags.png
     [Teardown]    clean app
 
-Try to save note have tags and title
+Create Note Have Tags and Title
     Init mobile
     open app
     sealnote.set_text    1234    resourceId=com.twistedplane.sealnote:id/password_meter_input
@@ -89,10 +89,10 @@ Try to save note have tags and title
     builtin.sleep    2s
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
     Note title should be    hello
-    tags should be    tags.png
+    Tags should be Exsist    tags.png
     [Teardown]    clean app
 
-Try to save two note
+Create Two Notes
     Init mobile
     open app
     sealnote.set_text    1234    com.twistedplane.sealnote:id/password_meter_input
@@ -104,7 +104,7 @@ Try to save two note
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
     builtin.sleep    2s
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_new_note
-    mobile.ATX.click_image    plain_text.png
+    Click Label    Plain Text
     sealnote.set_text    hello1    resourceId=com.twistedplane.sealnote:id/note_activity_title
     sealnote.set_text    good1    resourceId=com.twistedplane.sealnote:id/note_activity_note
     builtin.sleep    2s
@@ -113,14 +113,15 @@ Try to save two note
     mobile.ATX.assertImage    hello1.png
     [Teardown]    clean app
 
-Login Detail
+Create a Login Detail
+    [Setup]
     Init mobile
     open app
     sealnote.set_text    1234    com.twistedplane.sealnote:id/password_meter_input
     sealnote.click    com.twistedplane.sealnote:id/password_action_button
-    builtin.sleep    2s
+    builtin.sleep    1s
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_new_note
-    mobile.ATX.clickImage    login_detail.png
+    Click Label    Login Details
     sealnote.set_text    shadowverse    resourceId=com.twistedplane.sealnote:id/note_activity_tags
     sealnote.set_text    Account    resourceId=com.twistedplane.sealnote:id/note_activity_title
     sealnote.set_text    https://shadowverse.gamewith.jp/    resourceId=com.twistedplane.sealnote:id/note_login_url
@@ -128,9 +129,9 @@ Login Detail
     sealnote.set_text    3345678    resourceId=com.twistedplane.sealnote:id/note_login_password
     sealnote.set_text    OTK    resourceId=com.twistedplane.sealnote:id/note_additional_note
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
-    mobile.ATX.assertImage    account.png
-    tags should be    tags.png
-    [Teardown]    clean app
+    Note Should Be Exsist    account.png
+    Tags should be Exsist    tags.png
+    [Teardown]    Clean App
 
 Edit tag
     Init mobile
@@ -141,15 +142,15 @@ Edit tag
     sealnote.set_text    shadowverse    resourceId=com.twistedplane.sealnote:id/note_activity_tags
     sealnote.set_text    hello    resourceId=com.twistedplane.sealnote:id/note_activity_title
     sealnote.set_text    good    resourceId=com.twistedplane.sealnote:id/note_activity_note
-    builtin.sleep    2s
+    builtin.sleep    1s
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
     mobile.ATX.clickImage    note.png
-    builtin.sleep    2s
-    mobile.ATX.clickImage    tags.png
-    builtin.sleep    2s
+    builtin.sleep    1s
+    Click Label    shadowverse
+    builtin.sleep    1s
     mobile.ATX.clickImage    edit_tag_setting.png
     builtin.sleep    1s
-    mobile.ATX.clickImage    edit_tag.png
+    Click Label    Edit tags
     builtin.sleep    1s
     mobile.ATX.clickImage    shadowverse.png
     delete
@@ -158,10 +159,11 @@ Edit tag
     sealnote.click    resourceId=android:id/button1
     Image should be    shadowverse_edit.png
     mobile.ATX.clickImage    deleteTag.png
-    Click Label     確定
+    Click Label    確定
     Note Should Not Be Exsist    shadowverse_edit.png
+    [Teardown]    Clean App
 
-Type empty password
+Type Empty password
     Clean SealNote Data
     Init mobile
     Open SealNote
@@ -173,21 +175,24 @@ Type empty password
 
 Test Degress Of Password
     Init mobile
-    Open SealNote
+    open app
     BuiltIn.Sleep    1s
     Type Password    1234
     Degree Of Password Should Be    Weak
-    Type Password    12345
+    sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/password_meter_input
+    Type Password    123451234
     Degree Of Password Should Be    So-so
-    Type Password    0989
+    sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/password_meter_input
+    Type Password    0989123451234
     Degree Of Password Should Be    Good
-    Type Password    123456
+    sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/password_meter_input
+    Type Password    1234560989123451234
     Degree Of Password Should Be    Strong
-    Close SealNote
+    [Teardown]    Clean App
 
 Type Error Password
-    Clean SealNote Data
     Init mobile
+    open app
     Open SealNote
     BuiltIn.Sleep    1s
     Type Password    1234
@@ -198,11 +203,12 @@ Type Error Password
     BuiltIn.Sleep    1s
     Type Password    4321
     sealnote.click    resourceId=com.twistedplane.sealnote:id/password_action_button
+    sealnote.press_back
     Toast Should Be Show    InvalidPassword.png
     BuiltIn.Sleep    2s
     Close SealNote
 
-Test Credit Card
+Type Different of Credit Card Number
     Init mobile
     open app
     Type Password    1234
@@ -214,15 +220,16 @@ Test Credit Card
     Type Credit Card Number    4716152906495672
     Credit Card Should Be Show    VISA.png
     sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/note_card_number
-    BuiltIn.Sleep    2s
+    BuiltIn.Sleep    1s
     Type Credit Card Number    5528550136127699
     Credit Card Should Be Show    MasterCard.png
     sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/note_card_number
-    BuiltIn.Sleep    2s
+    BuiltIn.Sleep    1s
     Type Credit Card Number    349444104493903
     Credit Card Should Be Show    American.png
     sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/note_card_number
-    BuiltIn.Sleep    2s
+    BuiltIn.Sleep    1s
+    [Teardown]    Clean App
 
 Change Note Color
     Init mobile
@@ -241,8 +248,9 @@ Change Note Color
     Mobile.ATX.ClickImage    Blue.png
     sealnote.Click    resourceId=com.twistedplane.sealnote:id/action_save_note
     Note should be Exsist    BlueNote.png
+    [Teardown]    Clean App
 
-Delete a Note
+Delete a Note and Retore It
     Init mobile
     open app
     Type Password    1234
@@ -267,6 +275,42 @@ Delete a Note
     Mobile.ATX.ClickImage    Notes.png
     Note Should Be Exsist    trashNote.png
     Mobile.ADB.shell_cmd    am force-stop com.twistedplane.sealnote
+    [Teardown]    Clean App
+
+Change Password
+    Init mobile
+    open app
+    Type Password    1234
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    Mobile.ATX.Click_image    homePageMore.png
+    Click Label    Settings
+    Click Label    Change Password
+    sealnote.set_text    1234    resourceId=com.twistedplane.sealnote:id/diag_password_pref_oldPassword
+    sealnote.set_text    99999    resourceId=com.twistedplane.sealnote:id/password_meter_input
+    sealnote.set_text    99999    resourceId=com.twistedplane.sealnote:id/diag_password_pref_newPasswordConfirm
+    BuiltIn.sleep    1s
+    sealnote.Click    resourceId=com.twistedplane.sealnote:id/button_positive
+    BuiltIn.sleep    3s
+    Close SealNote
+    Open SealNote
+    Type Password    99999
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/password_action_button
+    Image Should Be    homePage.png
+    [Teardown]    Clean App
+
+Secure ScreenShoot
+    Init mobile
+    open app
+    Type Password    1234
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    Mobile.ATX.Click_image    homePageMore.png
+    Click Label    Settings
+    Click Label    Secure window content
+    Click Label    Settings
+    Mobile.ADB.shell_cmd    screencap -p /sdcard/screen.png
+    Mobile.ADB.shell_cmd    am start -d file:///storage/emulated/0/screen.png -t image/jpg -a android.intent.action.VIEW
+    Image Should Not Be    homePage.png
+    [Teardown]    Clean App
 
 *** Keywords ***
 Init mobile
@@ -297,18 +341,26 @@ Note text should be
 
 Clean app
     SealNote.execute_adb_shell_command    pm clear com.twistedplane.sealnote
+    SealNote.execute_adb_shell_command    input keyevent 03
 
-Tags should be
+Tags should be Exsist
     [Arguments]    ${img}
     Mobile.ATX.clickImage    note.png
-    builtin.sleep    2s
+    builtin.sleep    1s
     ${boolean}    Mobile.ATX.assertImage    ${img}
     BuiltIn.Should Be True    ${boolean}
 
 Image should be
     [Arguments]    ${img}
+    BuiltIn.sleep    3s
     ${boolean}    Mobile.ATX.assertImage    ${img}
     BuiltIn.Should Be True    ${boolean}
+
+Image Should Not Be
+    [Arguments]    ${img}
+    BuiltIn.sleep    3s
+    ${boolean}    Mobile.ATX.assertImage    ${img}
+    BuiltIn.Should Not Be True    ${boolean}
 
 delete
     sealnote.click    resourceId=com.twistedplane.sealnote:id/input_rename
@@ -332,6 +384,7 @@ Clean SealNote Data
     Mobile.ADB.shell_cmd    pm clear com.twistedplane.sealnote
 
 Close SealNote
+    BuiltIn.sleep    1s
     Mobile.ADB.shell_cmd    am force-stop com.twistedplane.sealnote
 
 Type Password
@@ -350,6 +403,7 @@ Type Credit Card Number
 
 Credit Card Should Be Show
     [Arguments]    ${card}
+    BuiltIn.Sleep    1s
     ${boolean}    Mobile.ATX.assertImage    ${card}
     BuiltIn.Should Be True    ${boolean}
 
