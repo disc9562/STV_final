@@ -208,29 +208,6 @@ Type Error Password
     BuiltIn.Sleep    2s
     Close SealNote
 
-Type Different of Credit Card Number
-    Init mobile
-    open app
-    Type Password    1234
-    sealnote.click    com.twistedplane.sealnote:id/password_action_button
-    BuiltIn.Sleep    1s
-    Mobile.ATX.ClickImage    newNote.png
-    Click Label    Card Details
-    BuiltIn.Sleep    1s
-    Type Credit Card Number    4716152906495672
-    Credit Card Should Be Show    VISA.png
-    sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/note_card_number
-    BuiltIn.Sleep    1s
-    Type Credit Card Number    5528550136127699
-    Credit Card Should Be Show    MasterCard.png
-    sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/note_card_number
-    BuiltIn.Sleep    1s
-    Type Credit Card Number    349444104493903
-    Credit Card Should Be Show    American.png
-    sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/note_card_number
-    BuiltIn.Sleep    1s
-    [Teardown]    Clean App
-
 Change Note Color
     Init mobile
     open app
@@ -310,6 +287,69 @@ Secure ScreenShoot
     Mobile.ADB.shell_cmd    screencap -p /sdcard/screen.png
     Mobile.ADB.shell_cmd    am start -d file:///storage/emulated/0/screen.png -t image/jpg -a android.intent.action.VIEW
     Image Should Not Be    homePage.png
+    [Teardown]    Clean App
+
+Create VISA Note
+    Init mobile
+    open app
+    Type Password    1234
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    BuiltIn.Sleep    1s
+    Mobile.ATX.ClickImage    newNote.png
+    Click Label    Card Details
+    BuiltIn.Sleep    1s
+    Type Credit Card Number    4716152906495672
+    Credit Card Should Be Show    VISA.png
+    sealnote.set_text    tag1    resourceId=com.twistedplane.sealnote:id/note_activity_tags
+    sealnote.set_text    I_am_VISA    resourceId=com.twistedplane.sealnote:id/note_activity_title
+    sealnote.set_text    VISA    resourceId=com.twistedplane.sealnote:id/note_card_name
+    sealnote.set_text    12    resourceId=com.twistedplane.sealnote:id/note_card_valid_from
+    sealnote.set_text    34    resourceId=com.twistedplane.sealnote:id/note_card_valid_upto
+    sealnote.set_text    56    resourceId=com.twistedplane.sealnote:id/note_card_cvv
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    Note Should Be Exsist    VISANote.png
+    [Teardown]    Clean App
+
+Create American Note
+    Init mobile
+    open app
+    Type Password    1234
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    BuiltIn.Sleep    1s
+    Mobile.ATX.ClickImage    newNote.png
+    Click Label    Card Details
+    BuiltIn.Sleep    1s
+    Type Credit Card Number    349444104493903
+    Credit Card Should Be Show    American.png
+    sealnote.set_text    tag1    resourceId=com.twistedplane.sealnote:id/note_activity_tags
+    sealnote.set_text    I_am_American    resourceId=com.twistedplane.sealnote:id/note_activity_title
+    sealnote.set_text    American    resourceId=com.twistedplane.sealnote:id/note_card_name
+    sealnote.set_text    12    resourceId=com.twistedplane.sealnote:id/note_card_valid_from
+    sealnote.set_text    34    resourceId=com.twistedplane.sealnote:id/note_card_valid_upto
+    sealnote.set_text    56    resourceId=com.twistedplane.sealnote:id/note_card_cvv
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    Note Should Be Exsist    AmericanNote.png
+    [Teardown]    Clean App
+
+Create Master Note
+    Init mobile
+    open app
+    Type Password    1234
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    BuiltIn.Sleep    1s
+    Mobile.ATX.ClickImage    newNote.png
+    Click Label    Card Details
+    BuiltIn.Sleep    1s
+    Type Credit Card Number    5528550136127699
+    Credit Card Should Be Show    MasterCard.png
+    sealnote.set_text    tag1    resourceId=com.twistedplane.sealnote:id/note_activity_tags
+    sealnote.set_text    I_am_Master    resourceId=com.twistedplane.sealnote:id/note_activity_title
+    sealnote.set_text    Master    resourceId=com.twistedplane.sealnote:id/note_card_name
+    sealnote.set_text    12    resourceId=com.twistedplane.sealnote:id/note_card_valid_from
+    sealnote.set_text    34    resourceId=com.twistedplane.sealnote:id/note_card_valid_upto
+    sealnote.set_text    56    resourceId=com.twistedplane.sealnote:id/note_card_cvv
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    Note Should Be Exsist    MasterNote.png
     [Teardown]    Clean App
 
 *** Keywords ***
