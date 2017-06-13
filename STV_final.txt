@@ -352,6 +352,87 @@ Create Master Note
     Note Should Be Exsist    MasterNote.png
     [Teardown]    Clean App
 
+Archive Note
+    Init mobile
+    open app
+    sealnote.set_text    1234    com.twistedplane.sealnote:id/password_meter_input
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/create_note_button
+    sealnote.set_text    hello    resourceId=com.twistedplane.sealnote:id/note_activity_title
+    sealnote.set_text    good    resourceId=com.twistedplane.sealnote:id/note_activity_note
+    builtin.sleep    2s
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    Mobile.ATX.ClickImage    hello.png
+    Mobile.ATX.ClickImage    more.png
+    Click Label    Archive
+    Mobile.ATX.ClickImage    note.png
+    Click Label    Archive
+    Note Should Be Exsist    hello.png
+    [Teardown]    Clean App
+
+Edit Note
+    Init mobile
+    open app
+    sealnote.set_text    1234    com.twistedplane.sealnote:id/password_meter_input
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/create_note_button
+    sealnote.set_text    hello    resourceId=com.twistedplane.sealnote:id/note_activity_title
+    sealnote.set_text    good    resourceId=com.twistedplane.sealnote:id/note_activity_note
+    builtin.sleep    1s
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    Mobile.ATX.ClickImage    hello.png
+    sealnote.set_text    hello1    resourceId=com.twistedplane.sealnote:id/note_activity_title
+    sealnote.set_text    good1    resourceId=com.twistedplane.sealnote:id/note_activity_note
+    builtin.sleep    1s
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    Note Should Be Exsist    hello1.png
+    [Teardown]    Clean App
+
+Password Timeout 10s
+    Init mobile
+    open app
+    Type Password    1234
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    Mobile.ATX.Click_image    homePageMore.png
+    Click Label    Settings
+    Click Label    Password timeout
+    BuiltIn.sleep    1s
+    Click Label    10 seconds
+    BuiltIn.Sleep    10s
+    Click Label    Settings
+    Image Should Be    LoginPage.png
+    [Teardown]    Clean App
+
+Password Timeout 30s
+    Init mobile
+    open app
+    Type Password    1234
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    Mobile.ATX.Click_image    homePageMore.png
+    Click Label    Settings
+    Click Label    Password timeout
+    BuiltIn.sleep    1s
+    Click Label    30 seconds
+    BuiltIn.Sleep    30s
+    Click Label    Settings
+    Image Should Be    LoginPage.png
+    [Teardown]    Clean App
+
+Password Timeout 60s
+    Init mobile
+    open app
+    Type Password    1234
+    sealnote.click    com.twistedplane.sealnote:id/password_action_button
+    Mobile.ATX.Click_image    homePageMore.png
+    Click Label    Settings
+    Click Label    Password timeout
+    BuiltIn.sleep    1s
+    Click Label    1 minute
+    BuiltIn.Sleep    60s
+    Click Label    Settings
+    Image Should Be    LoginPage.png
+    [Teardown]    Clean App
+
 *** Keywords ***
 Init mobile
     SealNote.set_serial    FA357PN01129
@@ -430,6 +511,7 @@ Close SealNote
 Type Password
     [Arguments]    ${password}
     sealnote.set_text    ${password}    resourceId=com.twistedplane.sealnote:id/password_meter_input
+    BuiltIn.sleep    1s
 
 Degree Of Password Should Be
     [Arguments]    ${degree}
