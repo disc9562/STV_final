@@ -179,13 +179,16 @@ Test Degress Of Password
     BuiltIn.Sleep    1s
     Type Password    1234
     Degree Of Password Should Be    Weak
-    sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/password_meter_input
+    close sealnote
+    open sealnote
     Type Password    123451234
     Degree Of Password Should Be    So-so
-    sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/password_meter_input
+    close sealnote
+    open sealnote
     Type Password    0989123451234
     Degree Of Password Should Be    Good
-    sealnote.clear_text    resourceId=com.twistedplane.sealnote:id/password_meter_input
+    close sealnote
+    open sealnote
     Type Password    1234560989123451234
     Degree Of Password Should Be    Strong
     [Teardown]    Clean App
@@ -250,6 +253,7 @@ Delete a Note and Retore It
     sealnote.Click    resourceId=com.twistedplane.sealnote:id/action_restore
     Mobile.ATX.ClickImage    TrashNavi.png
     Mobile.ATX.ClickImage    Notes.png
+    BuiltIn.Sleep    1s
     Note Should Be Exsist    trashNote.png
     Mobile.ADB.shell_cmd    am force-stop com.twistedplane.sealnote
     [Teardown]    Clean App
@@ -336,7 +340,7 @@ Create Master Note
     open app
     Type Password    1234
     sealnote.click    com.twistedplane.sealnote:id/password_action_button
-    BuiltIn.Sleep    1s
+    BuiltIn.Sleep    2s
     Mobile.ATX.ClickImage    newNote.png
     Click Label    Card Details
     BuiltIn.Sleep    1s
@@ -364,9 +368,12 @@ Archive Note
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
     Mobile.ATX.ClickImage    hello.png
     Mobile.ATX.ClickImage    more.png
+    BuiltIn.Sleep    1s
     Click Label    Archive
     Mobile.ATX.ClickImage    note.png
+    BuiltIn.Sleep    1s
     Click Label    Archive
+    BuiltIn.Sleep    1s
     Note Should Be Exsist    hello.png
     [Teardown]    Clean App
 
@@ -380,11 +387,15 @@ Edit Note
     sealnote.set_text    good    resourceId=com.twistedplane.sealnote:id/note_activity_note
     builtin.sleep    1s
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    BuiltIn.Sleep    1s
     Mobile.ATX.ClickImage    hello.png
+    delete title
     sealnote.set_text    hello1    resourceId=com.twistedplane.sealnote:id/note_activity_title
+    delete note
     sealnote.set_text    good1    resourceId=com.twistedplane.sealnote:id/note_activity_note
     builtin.sleep    1s
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    BuiltIn.Sleep    1s
     Note Should Be Exsist    hello1.png
     [Teardown]    Clean App
 
@@ -556,3 +567,17 @@ Dialog Should Be Show
 Click Label
     [Arguments]    ${name}
     Mobile.ATX.Click_by_string    ${name}
+
+delete Title
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/note_activity_title
+    sealnote.press_delete
+    sealnote.press_delete
+    sealnote.press_delete
+    sealnote.press_delete
+
+delete Note
+    sealnote.click    resourceId=com.twistedplane.sealnote:id/note_activity_note
+    sealnote.press_delete
+    sealnote.press_delete
+    sealnote.press_delete
+    sealnote.press_delete
