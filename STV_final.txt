@@ -207,6 +207,7 @@ Type Error Password
     Type Password    4321
     sealnote.click    resourceId=com.twistedplane.sealnote:id/password_action_button
     sealnote.press_back
+    BuiltIn.Sleep    2s
     Toast Should Be Show    InvalidPassword.png
     BuiltIn.Sleep    2s
     Close SealNote
@@ -299,6 +300,7 @@ Create VISA Note
     Type Password    1234
     sealnote.click    com.twistedplane.sealnote:id/password_action_button
     BuiltIn.Sleep    1s
+    BuiltIn.Sleep    2s
     Mobile.ATX.ClickImage    newNote.png
     Click Label    Card Details
     BuiltIn.Sleep    1s
@@ -311,6 +313,7 @@ Create VISA Note
     sealnote.set_text    34    resourceId=com.twistedplane.sealnote:id/note_card_valid_upto
     sealnote.set_text    56    resourceId=com.twistedplane.sealnote:id/note_card_cvv
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    BuiltIn.Sleep    2s
     Note Should Be Exsist    VISANote.png
     [Teardown]    Clean App
 
@@ -320,6 +323,7 @@ Create American Note
     Type Password    1234
     sealnote.click    com.twistedplane.sealnote:id/password_action_button
     BuiltIn.Sleep    1s
+    BuiltIn.Sleep    2s
     Mobile.ATX.ClickImage    newNote.png
     Click Label    Card Details
     BuiltIn.Sleep    1s
@@ -332,6 +336,7 @@ Create American Note
     sealnote.set_text    34    resourceId=com.twistedplane.sealnote:id/note_card_valid_upto
     sealnote.set_text    56    resourceId=com.twistedplane.sealnote:id/note_card_cvv
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    BuiltIn.Sleep    2s
     Note Should Be Exsist    AmericanNote.png
     [Teardown]    Clean App
 
@@ -345,6 +350,7 @@ Create Master Note
     Click Label    Card Details
     BuiltIn.Sleep    1s
     Type Credit Card Number    5528550136127699
+    BuiltIn.Sleep    2s
     Credit Card Should Be Show    MasterCard.png
     sealnote.set_text    tag1    resourceId=com.twistedplane.sealnote:id/note_activity_tags
     sealnote.set_text    I_am_Master    resourceId=com.twistedplane.sealnote:id/note_activity_title
@@ -353,6 +359,7 @@ Create Master Note
     sealnote.set_text    34    resourceId=com.twistedplane.sealnote:id/note_card_valid_upto
     sealnote.set_text    56    resourceId=com.twistedplane.sealnote:id/note_card_cvv
     sealnote.click    resourceId=com.twistedplane.sealnote:id/action_save_note
+    BuiltIn.Sleep    2s
     Note Should Be Exsist    MasterNote.png
     [Teardown]    Clean App
 
@@ -544,6 +551,7 @@ Toast Should Be Show
     [Arguments]    ${toast}
     BuiltIn.Sleep    1s
     ${boolean}    Mobile.ATX.assertImage    ${toast}
+    BuiltIn.Sleep    2s
     BuiltIn.Should Be True    ${boolean}
 
 Note Should Not Be Exsist
